@@ -461,7 +461,7 @@ func (f *Document) Metadata() map[string]string {
 
 	lookup := func(key string) string {
 		buf := make([]byte, 256)
-		fzLookupMetadata(f.ctx, f.doc, key, unsafe.SliceData(buf), len(buf))
+		fzLookupMetadata(f.ctx, f.doc, key, unsafe.SliceData(buf), uint64(len(buf)))
 
 		return string(buf)
 	}
@@ -558,7 +558,7 @@ var (
 	fzDropStextPage            func(ctx *fzContext, page *fzStextPage)
 	fzNewStextDevice           func(ctx *fzContext, page *fzStextPage, options *fzStextOptions) *fzDevice
 	fzNewBufferFromStextPage   func(ctx *fzContext, page *fzStextPage) *fzBuffer
-	fzLookupMetadata           func(ctx *fzContext, doc *fzDocument, key string, buf *uint8, size int) int
+	fzLookupMetadata           func(ctx *fzContext, doc *fzDocument, key string, buf *uint8, size uint64) int
 	fzLoadOutline              func(ctx *fzContext, doc *fzDocument) *fzOutline
 	fzDropOutline              func(ctx *fzContext, outline *fzOutline)
 	fzNewOutputWithBuffer      func(ctx *fzContext, buf *fzBuffer) *fzOutput
